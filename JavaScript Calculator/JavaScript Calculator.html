@@ -1,0 +1,59 @@
+<html>
+    <link rel="stylesheet" type="text/css" href="style.css">.
+    
+    <body>
+
+        <div id="mainContainer">
+            <span>ELECTRONIC CALCULATOR</span>
+            <div id="displayArea">
+
+                <div id="inputArea">
+                    <p id="inputHere"></p>
+                </div>
+
+                <div id="inpHere">
+                    <p id="outputHere"></p>
+                </div>
+                
+            </div>
+
+            <div id="keys">
+                <table id="numPad">
+                    <tr>
+                        <td><button onclick="clrScr()" style="background-color:brown">CE</button></td>
+                        <td><button onclick="clrScr()" style="background-color:brown">C</button></td>
+                        <td><button onclick="minus1digit()">del</button></td>
+                        <td><button onclick="inpVal('/')">/</button></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="inpVal(7)">7</button></td>
+                        <td><button onclick="inpVal(8)">8</button></td>
+                        <td><button onclick="inpVal(9)">9</button></td>
+                        <td><button onclick="inpVal('*')">*</button></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="inpVal(4)">4</button></td>
+                        <td><button onclick="inpVal(5)">5</button></td>
+                        <td><button onclick="inpVal(6)">6</button></td>
+                        <td><button onclick="inpVal('-')">-</button></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="inpVal(1)">1</button></td>
+                        <td><button onclick="inpVal(2)">2</button></td>
+                        <td><button onclick="inpVal(3)">3</button></td>
+                        <td><button onclick="inpVal('+')">+</button></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="inpVal('00')">00</button></td>
+                        <td><button onclick="inpVal('0')">0</button></td>
+                        <td><button onclick="inpVal('.')">.</button></td>
+                        <td><button onclick="produceOutput()">=</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <footer>Designed & Cooded By  <a href="https://www.facebook.com/amit.mahato.643" style="color:rgb(136, 9, 9); text-decoration:unset;">Amit Mahato</a></footer>
+        <script src="script.js"></script>
+    </body>
+    
+    </html>
