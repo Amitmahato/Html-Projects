@@ -1,0 +1,241 @@
+<html>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            background-color: rgb(107, 105, 103);
+        }
+        #mainContainer{
+            background-color: rgb(223, 216, 208);
+            text-align: center;
+            position: relative;
+            margin-left:30%;
+            margin-right:30%;
+            top:20%;
+            min-width:300px;
+            width:30%;
+            min-height: 450px;
+            height:70%;
+            border:black solid 1px;
+            border-radius: 25px;
+            box-shadow:rgb(14, 9, 9) 2px 2px 20px 2px;
+        }
+
+        #mainContainer span{
+            font-family: cursive;
+            vertical-align: baseline;
+            padding-top:5px;
+        }
+
+        #mainContainer #displayArea{ 
+            background-color:rgb(57, 126, 83);
+            color:rgb(0, 0, 0);
+            margin:5%;
+            width:90%;
+            height:25%;
+            border:red solid 0px;
+            border-radius:10px;
+            box-shadow: rgb(0, 0, 0) 0px 0px 10px -3px;
+            vertical-align: top;
+            align-self: center;
+        }
+
+        #mainContainer #displayArea #inputArea{
+            width:100%;
+            height:50%;
+        }
+        #mainContainer #displayArea #inputHere{
+            padding-top: 10px;
+            padding-left: 10px;
+            width:fit-content;
+            font-size: x-large;
+            text-align: left;
+        }
+
+        #mainContainer #displayArea #outputArea{
+            width:100%;
+            height:50%;
+            padding-bottom: 20px;
+        }
+        #mainContainer #displayArea #outputHere{
+            /* padding-top: 15px; */
+            padding-right: 15px;
+            width:fit-content;
+            font-size: x-large;
+            float:right;
+            text-align: right;
+        }
+
+        table{
+            margin:5%;
+            width:90%;
+            height:60%;
+            vertical-align: bottom;
+            clear:both;
+            margin-top:5%;
+            margin-bottom:2%;
+            border:rgb(0, 0, 255) solid 0px;
+        }
+        
+        table tr td{
+            border-radius: 5px;
+        }
+
+        button{
+            background-color: rgb(57, 61, 57);
+            color:rgb(255, 255, 255);
+            width:100%;
+            height:100%;
+            font-family: Orbitron, sans-serif;
+            font-size: larger;
+            font-weight:bolder;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        footer{
+            color:#333333;
+            color:rgb(51, 51, 51);
+            background-color:#000000;
+            background-color:rgba(0, 0, 0, 0);
+            /* font-family (stack):sans-serif; */
+            font-size:16px;
+            text-align: center;
+            margin-top:25%;
+        }
+    </style>
+    
+    <body>
+
+        <div id="mainContainer">
+            <span>ELECTRONIC CALCULATOR</span>
+            <div id="displayArea">
+
+                <div id="inputArea">
+                    <p id="inputHere"></p>
+                </div>
+
+                <div id="inpHere">
+                    <p id="outputHere"></p>
+                </div>
+                
+            </div>
+
+            <div id="keys">
+                <table id="numPad">
+                    <tr>
+                        <td><button onclick="clrScr()" style="background-color:brown">CE</button></td>
+                        <td><button onclick="clrScr()" style="background-color:brown">C</button></td>
+                        <td><button onclick="minus1digit()">del</button></td>
+                        <td><button onclick="inpVal('/')">/</button></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="inpVal(7)">7</button></td>
+                        <td><button onclick="inpVal(8)">8</button></td>
+                        <td><button onclick="inpVal(9)">9</button></td>
+                        <td><button onclick="inpVal('*')">*</button></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="inpVal(4)">4</button></td>
+                        <td><button onclick="inpVal(5)">5</button></td>
+                        <td><button onclick="inpVal(6)">6</button></td>
+                        <td><button onclick="inpVal('-')">-</button></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="inpVal(1)">1</button></td>
+                        <td><button onclick="inpVal(2)">2</button></td>
+                        <td><button onclick="inpVal(3)">3</button></td>
+                        <td><button onclick="inpVal('+')">+</button></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="inpVal('00')">00</button></td>
+                        <td><button onclick="inpVal('0')">0</button></td>
+                        <td><button onclick="inpVal('.')">.</button></td>
+                        <td><button onclick="produceOutput()">=</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <footer>Designed & Cooded By  <a href="https://www.facebook.com/amit.mahato.643" style="color:rgb(136, 9, 9); text-decoration:unset;">Amit Mahato</a></footer>
+        <script>
+            document.getElementById('inputHere').innerHTML='0';
+            
+            // Display overall input values on keypress
+            function inpVal(inp){
+                var initialVal = document.getElementById('inputHere');
+                if(initialVal.innerHTML==0)
+                    initialVal.innerHTML=inp;
+                else
+                    initialVal.innerHTML = initialVal.innerHTML + inp;
+            }
+
+            // Output Produce On Clicking = sign
+            function produceOutput(){
+                var inpData = document.getElementById("inputHere").innerHTML;
+                validateInput(inpData);
+                
+                var result = eval(inpData);
+                var noDecimal = countDecimals(result);
+                if(noDecimal>=17)
+                {
+                    document.getElementById('outputHere').innerHTML=result.toFixed(18);
+                }
+                else{
+                    document.getElementById('outputHere').innerHTML=result;
+                }
+            }
+
+            // validate input for no sign error
+            function validateInput(inpData)
+            {
+                var lastDigit = inpData[inpData.length-1];
+                console.log(lastDigit);
+                switch(lastDigit)
+                {
+                    case '+':
+                    case '-':
+                    case '*':
+                    case '/':
+                    case '.':
+                        {
+                            document.getElementById('outputHere').innerHTML='Sign Error';
+                            break;
+                        }
+                }
+            }
+            // For standard output of result i.e. limited no. of digits after decimal
+            function countDecimals(value) {
+                if (Math.floor(value) !== value)
+                    return value.toString().split(".")[1].length || 0;
+                return 0;
+            }
+
+
+            function minus1digit(){
+                var inputData = document.getElementById("inputHere").innerHTML;
+                var returnInp ='';
+                if(inputData.length==1)
+                {
+                    returnInp = '0';
+                }
+                else{
+                    for(var i=0; i<inputData.length-1;i++)
+                    {
+                        returnInp+=inputData[i];
+                    }
+                }
+                
+                document.getElementById("inputHere").innerHTML=returnInp;
+                
+            }
+
+            function clrScr(){
+                var inphere = document.getElementById('inputHere');
+                var outhere = document.getElementById('outputHere');
+                inphere.innerHTML='0';
+                outhere.innerHTML='';
+            }
+        </script>
+    </body>
+    
+    </html>
