@@ -1,2 +1,2 @@
 # Html-Projects
-Contains Projects Made In Web Development Languages Learned
+Contains projects done while learning webapp development.
